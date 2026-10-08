@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 /* ───────── 1. CONNECT YOUR BACKEND (only part you need to edit) ───────── */
-const API_URL = "http://127.0.0.1:8000/predict";
+const API_URL = "https://customer-churn-api-1dzf.onrender.com/predict";
 
 // Match these keys to what your model/API expects.
 
