@@ -1,3 +1,7 @@
+/* ================================
+   CUSTOMER CHURN AI - PREMIUM UI
+================================ */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,67 +9,249 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #080b14;
-  color: white;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: #050816;
+  color: #ffffff;
 }
+
+/* ================================
+   MAIN BACKGROUND
+================================ */
 
 .app {
   min-height: 100vh;
-  padding: 50px 20px;
+  position: relative;
+  overflow: hidden;
   background:
-    radial-gradient(circle at top left, #30206b 0%, transparent 35%),
-    radial-gradient(circle at bottom right, #064e5c 0%, transparent 35%),
-    #080b14;
+    radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.18), transparent 30%),
+    radial-gradient(circle at 85% 25%, rgba(6, 182, 212, 0.15), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(236, 72, 153, 0.12), transparent 35%),
+    #050816;
 }
 
-.container {
-  max-width: 950px;
-  margin: auto;
+/* Grid background */
+
+.app::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(to bottom, black, transparent);
+  pointer-events: none;
 }
+
+/* Floating glow */
+
+.app::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.14);
+  filter: blur(100px);
+  top: -200px;
+  right: -150px;
+  animation: floatGlow 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes floatGlow {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-100px, 100px);
+  }
+}
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container {
+  width: min(1100px, 92%);
+  margin: auto;
+  padding: 70px 0 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ================================
+   HEADER
+================================ */
 
 .header {
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 45px;
+  animation: fadeDown 0.8s ease forwards;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tag {
-  color: #06b6d4;
-  font-size: 13px;
-  font-weight: bold;
-  letter-spacing: 3px;
-  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 16px;
+  border: 1px solid rgba(124, 58, 237, 0.4);
+  border-radius: 50px;
+
+  background: rgba(124, 58, 237, 0.08);
+
+  color: #a78bfa;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  box-shadow:
+    0 0 25px rgba(124, 58, 237, 0.12);
+
+  margin-bottom: 22px;
 }
 
-h1 {
-  font-size: 48px;
-  margin-bottom: 12px;
+.tag::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 12px #22d3ee;
+  animation: pulse 1.5s infinite;
 }
 
-h1 span {
-  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.65);
+  }
+}
+
+.header h1 {
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -3px;
+  margin-bottom: 18px;
+}
+
+.header h1 span {
+  background: linear-gradient(
+    90deg,
+    #8b5cf6,
+    #06b6d4,
+    #ec4899,
+    #8b5cf6
+  );
+
+  background-size: 300% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
+
+  animation: gradientMove 5s linear infinite;
+}
+
+@keyframes gradientMove {
+  to {
+    background-position: 300% center;
+  }
 }
 
 .subtitle {
-  color: #9ca3af;
+  color: #94a3b8;
   font-size: 17px;
+  max-width: 650px;
+  margin: auto;
 }
 
+/* ================================
+   MAIN CARD
+================================ */
+
 .card {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 35px;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+  position: relative;
+
+  padding: 38px;
+
+  background: rgba(15, 23, 42, 0.62);
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 28px;
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  animation: cardEnter 0.9s ease forwards;
 }
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* glowing border */
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+
+  border-radius: 28px;
+
+  background: linear-gradient(
+    120deg,
+    rgba(139, 92, 246, 0.35),
+    transparent 35%,
+    transparent 65%,
+    rgba(6, 182, 212, 0.35)
+  );
+
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ================================
+   FORM
+================================ */
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
 }
 
 .input-group {
@@ -74,125 +260,387 @@ h1 span {
   gap: 9px;
 }
 
-label {
-  color: #d1d5db;
-  font-size: 14px;
+.input-group label {
+  color: #cbd5e1;
+  font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
-input,
-select {
+.input-group input,
+.input-group select {
   width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #374151;
-  background: #111827;
-  color: white;
-  font-size: 15px;
+  height: 52px;
+
+  padding: 0 16px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(148, 163, 184, 0.18);
+
+  background: rgba(2, 6, 23, 0.65);
+
+  color: #f8fafc;
+
   outline: none;
+
+  font-size: 15px;
+
+  transition:
+    border 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease,
+    background 0.25s ease;
 }
 
-input:focus,
-select:focus {
-  border-color: #06b6d4;
+.input-group input::placeholder {
+  color: #64748b;
 }
 
-select option {
-  background: #111827;
+.input-group input:hover,
+.input-group select:hover {
+  border-color: rgba(139, 92, 246, 0.45);
 }
 
-.predict-btn {
-  width: 100%;
-  margin-top: 30px;
-  padding: 16px;
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  background: linear-gradient(90deg, #7c3aed, #06b6d4);
-}
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #8b5cf6;
 
-.predict-btn:hover {
+  background: rgba(15, 23, 42, 0.9);
+
+  box-shadow:
+    0 0 0 4px rgba(139, 92, 246, 0.1),
+    0 0 25px rgba(139, 92, 246, 0.15);
+
   transform: translateY(-2px);
 }
 
-.result {
-  margin-top: 30px;
-  padding: 28px;
-  text-align: center;
-  border-radius: 18px;
+/* ================================
+   SELECT ARROW
+================================ */
+
+.input-group select {
+  cursor: pointer;
 }
 
-.result.success {
-  background: rgba(16, 185, 129, 0.1);
+/* ================================
+   BUTTON
+================================ */
+
+.predict-btn {
+  width: 100%;
+  height: 58px;
+
+  margin-top: 32px;
+
+  border: none;
+  border-radius: 16px;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    90deg,
+    #7c3aed,
+    #4f46e5,
+    #06b6d4
+  );
+
+  background-size: 200% auto;
+
+  box-shadow:
+    0 12px 35px rgba(124, 58, 237, 0.28);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  animation: buttonGradient 4s linear infinite;
+}
+
+@keyframes buttonGradient {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.predict-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 18px 45px rgba(124, 58, 237, 0.4);
+}
+
+.predict-btn:active {
+  transform: translateY(0);
+}
+
+/* ================================
+   RESULT
+================================ */
+
+.result {
+  margin-top: 30px;
+
+  padding: 35px;
+
+  text-align: center;
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  animation: resultAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes resultAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .result.danger {
-  background: rgba(239, 68, 68, 0.1);
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(239, 68, 68, 0.15),
+      transparent 60%
+    ),
+    rgba(127, 29, 29, 0.16);
+
+  border-color: rgba(239, 68, 68, 0.25);
 }
 
+.result.success {
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(34, 197, 94, 0.14),
+      transparent 60%
+    ),
+    rgba(6, 78, 59, 0.18);
+
+  border-color: rgba(34, 197, 94, 0.22);
+}
+
+/* ================================
+   RESULT ICON
+================================ */
+
 .result-icon {
-  font-size: 38px;
-  margin-bottom: 10px;
+  width: 62px;
+  height: 62px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 28px;
+
+  animation: iconPop 0.7s ease;
+}
+
+.danger .result-icon {
+  background: rgba(239, 68, 68, 0.12);
+  box-shadow: 0 0 35px rgba(239, 68, 68, 0.15);
+}
+
+.success .result-icon {
+  background: rgba(34, 197, 94, 0.12);
+  box-shadow: 0 0 35px rgba(34, 197, 94, 0.15);
+}
+
+@keyframes iconPop {
+  0% {
+    transform: scale(0);
+  }
+
+  70% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .result h2 {
-  font-size: 22px;
+  font-size: 23px;
   margin-bottom: 18px;
 }
 
 .result p {
-  color: #9ca3af;
-  margin-bottom: 8px;
+  color: #94a3b8;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
+/* ================================
+   PROBABILITY
+================================ */
+
 .probability {
-  font-size: 38px;
-  font-weight: bold;
-  margin-bottom: 15px;
+  font-size: 48px;
+  font-weight: 800;
+
+  margin: 5px 0 22px;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #a5b4fc
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
+
+/* ================================
+   PROGRESS BAR
+================================ */
 
 .progress {
   height: 10px;
+
+  width: 100%;
+
   border-radius: 20px;
-  background: #1f2937;
+
+  background: rgba(15, 23, 42, 0.8);
+
   overflow: hidden;
 }
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #7c3aed, #06b6d4);
-  border-radius: 20px;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #8b5cf6,
+    #06b6d4
+  );
+
+  box-shadow:
+    0 0 18px rgba(6, 182, 212, 0.45);
+
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  animation: progressGlow 2s ease-in-out infinite alternate;
 }
+
+@keyframes progressGlow {
+  from {
+    filter: brightness(1);
+  }
+
+  to {
+    filter: brightness(1.35);
+  }
+}
+
+/* ================================
+   ERROR
+================================ */
 
 .error {
   margin-top: 25px;
-  padding: 15px;
-  border-radius: 12px;
+
+  padding: 18px;
+
+  border-radius: 14px;
+
   background: rgba(239, 68, 68, 0.1);
+
+  border: 1px solid rgba(239, 68, 68, 0.25);
+
   color: #fca5a5;
+
   text-align: center;
+
+  animation: resultAppear 0.4s ease;
 }
+
+/* ================================
+   FOOTER
+================================ */
 
 footer {
   text-align: center;
-  margin-top: 30px;
-  color: #6b7280;
+
+  margin-top: 35px;
+
+  color: #475569;
+
   font-size: 13px;
 }
 
-@media (max-width: 700px) {
-  h1 {
-    font-size: 36px;
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+  .container {
+    padding: 45px 0 30px;
+  }
+
+  .header h1 {
+    font-size: 42px;
+    letter-spacing: -2px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 24px;
+    border-radius: 22px;
   }
 
   .grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .probability {
+    font-size: 40px;
+  }
+
+  .result {
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .header h1 {
+    font-size: 34px;
   }
 
   .card {
-    padding: 22px;
+    padding: 18px;
+  }
+
+  .predict-btn {
+    height: 54px;
   }
 }
